@@ -51,25 +51,16 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        if len(s) % 2 != 0:
-            return False
-            
-        elif len(s) == 0:
-            return False
-        
         stack = []
 
-        parameters = {")": "(", "}": "{", "]": "["}
+        lookup = {")": "(", "}": "{", "]": "["}
 
-        for string in s:
-            if string in parameters:
-                if stack:
-                    stack_pop = stack.pop()
-                
-                if parameters[string] != stack_pop:
-                    return False
-                
+        for p in s:
+            if p in lookup.values():
+            	stack.append(p)
+            elif stack and lookup[p] == stack[-1]:
+            	stack.pop()
             else:
-                stack.append(string)
-
-        return True
+            	return False
+                
+        return stack == []
