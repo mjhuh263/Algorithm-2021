@@ -42,3 +42,34 @@ print(solution([1,3,2,4,2]))
 
 
 # ======================================================================================
+
+# LeetCode # 20. : Valid Parentheses
+
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if len(s) % 2 != 0:
+            return False
+            
+        elif len(s) == 0:
+            return False
+        
+        stack = []
+
+        parameters = {")": "(", "}": "{", "]": "["}
+
+        for string in s:
+            if string in parameters:
+                if stack:
+                    stack_pop = stack.pop()
+                
+                if parameters[string] != stack_pop:
+                    return False
+                
+            else:
+                stack.append(string)
+
+        return True
