@@ -43,7 +43,7 @@ print(solution([1,3,2,4,2]))
 
 # ======================================================================================
 
-# LeetCode # 20. : Valid Parentheses
+# LeetCode # 20 : Valid Parentheses
 
 class Solution(object):
     def isValid(self, s):
@@ -67,7 +67,7 @@ class Solution(object):
 
 # ======================================================================================
 
-# LeetCode # 704. : Binary Search
+# LeetCode # 704 : Binary Search
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -86,7 +86,7 @@ class Solution:
 
 # ======================================================================================
 
-# LeetCode # 13. : Roman to Integer
+# LeetCode # 13 : Roman to Integer
 
 class Solution:
     def romanToInt(self, s: str) -> int:
@@ -109,3 +109,43 @@ class Solution:
                 else: 
                     res -= dict[s[i]]
         return result
+
+# ======================================================================================
+
+# LeetCode # 70 : Climbing Stairs
+
+class Solution:
+    def climbStairs(self, n):
+            """
+            :type n: int
+            :rtype: int
+            """
+            if n <= 2 and n >= 0:
+                return n
+
+            f = 1
+            s = 2 
+            c = 0 
+            
+            for _ in range(2, n):
+                c = f + s
+                f, s  = s, c
+                
+            return c 
+
+class Solution:
+    
+    def climbStairs(self, n: int) -> int:
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n <= 2 and n >= 0:
+            return n
+
+        arr = [1,2]
+
+        for i in range(2, n):
+            arr.append(arr[i-1] + arr[i-2])
+        
+        return arr[n-1]
