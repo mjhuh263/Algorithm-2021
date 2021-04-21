@@ -28,3 +28,22 @@ var climbStairs = function(n) {
     }
     return arr[n-1]
 };
+
+// LeetCode #448 : Find All Numbers Disappeared in an Array
+
+var findDisappearedNumbers = function(nums) {
+    for(let i=0; i < nums.length; i++){
+        index = Math.abs(nums[i]) - 1
+        nums[index] = -Math.abs(nums[index])
+    }
+
+    let res = new Array();
+
+    for(let i=0; i < nums.length; i++){
+        if (nums[i] > 0){
+        res.push(i+1)
+        }
+    }
+
+    return res
+};

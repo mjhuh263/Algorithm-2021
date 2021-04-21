@@ -36,9 +36,6 @@ def solution(answers):
     [boss.append(x+1) for x, num in enumerate(temp) if num == max(temp)]
 
     return boss
-   
-
-print(solution([1,3,2,4,2]))
 
 
 # ======================================================================================
@@ -149,3 +146,15 @@ class Solution:
             arr.append(arr[i-1] + arr[i-2])
         
         return arr[n-1]
+
+# ======================================================================================
+
+# LeetCode # 448 : Find All Numbers Disappeared in an Array
+
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        for i in range(len(nums)):
+            # index = abs(nums[i]) - 1
+            nums[abs(nums[i]) - 1] = - abs(nums[abs(nums[i]) - 1])
+
+        return [i+1 for i in range(len(nums)) if nums[i] > 0]
