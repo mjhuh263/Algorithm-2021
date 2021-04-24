@@ -12,3 +12,4 @@
 [4/19] leetcode # 121 : Best Time to Buy and Sell Stock / [문제풀이 블로그 게시물](https://velog.io/@mjhuh263/TIL-116-Algorithm-LeetCode-121.-Best-Time-to-Buy-and-Sell-Stock)<br>
 [4/20] leetcode # 70 : Climbing Stairs / [문제풀이 블로그 게시물](https://velog.io/@mjhuh263/TIL-118-Algorithm-70.-Climbing-Stairs)<br>
 [4/21] leetcode # 448 : Find All Numbers Disappeared in an Array / [문제풀이 블로그 게시물](https://velog.io/@mjhuh263/TIL-120-Algorithm-448.-Find-All-Numbers-Disappeared-in-an-Array)
+[4/24] leetcode # 287 : Find the Duplicate Number
