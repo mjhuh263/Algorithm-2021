@@ -14,3 +14,4 @@
 [4/21] leetcode # 448 : Find All Numbers Disappeared in an Array / [문제풀이 블로그 게시물](https://velog.io/@mjhuh263/TIL-120-Algorithm-448.-Find-All-Numbers-Disappeared-in-an-Array)<br>
 [4/24] leetcode # 287 : Find the Duplicate Number<br>
 [4/27] 이것이 코딩 테스트다 그리디 # 02 : 큰 수의 법칙 <br>
+[4/28] 이것이 코딩 테스트다 그리디 # 03 : 숫자 카드 게임 <br>
