@@ -15,3 +15,5 @@
 [4/24] leetcode # 287 : Find the Duplicate Number<br>
 [4/27] 이것이 코딩 테스트다 그리디 # 02 : 큰 수의 법칙 <br>
 [4/28] 이것이 코딩 테스트다 그리디 # 03 : 숫자 카드 게임 <br>
+[4/28] leetcode # 1071 : Greatest Common Divisor of Strings <br>
+[4/29] # 이것이 코딩 테스트다 그리디 # 04 : 1이 될때까지 <br>

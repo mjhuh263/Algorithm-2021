@@ -156,3 +156,67 @@ class Solution:
             return self.gcdOfStrings(str1[len(str2):], str2)
         else:
             return ''
+
+# ======================================================================================
+
+# 이것이 코딩 테스트다 그리디 # 04 : 1이 될때까지
+# 풀이 1 
+
+n, k = map(int, input().split())
+result = 0 
+
+while n >= k:
+    while n % k != 0:
+        n -= 1
+        result += 1 
+        
+        n //= k 
+        result += 1
+
+    while n > 1:
+        n -= 1
+        result += 1
+print(result)
+
+# 풀이 2: 나누어떨어지는 수가 될 때까지 1을 뺴는 법 
+# n이 k 이상이면 k로 나누는 것이 1을 빼는 것보다 빠르다
+n, k = map(int, input().split()) 
+result = 0 
+
+while True:
+    target = (n // k) * k 
+    result += (n - target)
+    n = target
+    
+    if n < k:
+        break 
+    result += 1
+    n //= k 
+
+result += (n - 1)
+print(result)
+
+"""
+n = 25
+k = 3 
+result = 0 
+
+target = 24
+result = 1
+n = 24
+result = 2
+n = 8
+
+target = 6
+result = 4
+n = 6
+result = 5
+n = 2
+
+target = 2
+result = 5
+n = 2
+result = 6
+-----------------------
+result = 6
+"""
