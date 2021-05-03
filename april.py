@@ -244,18 +244,3 @@ for plan in plans:
         x, y = nx, ny
 
 print(x, y)
-
-# ======================================================================================
-
-# 이것이 코딩 테스트다 구현 # 02 : 시각
-
-h = int(input())
-
-count = 0
-for i in range(h+1):
-    for j in range(60):
-        for k in range(60):
-            if '3' in str(i) + str(j) + str(k):
-                count += 1
-
-print(count)
