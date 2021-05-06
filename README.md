@@ -1,10 +1,5 @@
 # 🔥 Algorithm 2021
 
-## 이론 정리
-[이론 정리](https://www.notion.so/599c1d2f458d4e22b393643d0d1ac2ac) <br>
-
-블로그 링크도 같이 첨부합니다.
-
 ## March 
 [3/19] leetcode # 67 : Add Binary / [문제풀이 블로그 게시물](https://velog.io/@mjhuh263/TIL-102-Algorithm-Leetcode-67.-Add-Binary)<br>
 [3/22] 프로그래머스 : 완전탐색 모의고사  / [문제풀이 블로그 게시물](https://velog.io/@mjhuh263/TIL-107-Algorithm-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EC%99%84%EC%A0%84%ED%83%90%EC%83%89-%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC)<br>
@@ -21,7 +16,10 @@
 [4/28] leetcode # 1071 : Greatest Common Divisor of Strings <br>
 [4/29] 이것이 코딩 테스트다 그리디 # 04 : 1이 될때까지 <br>
 [4/30] 이것이 코딩 테스트다 구현 # 01 : 상하좌우 <br>
+
+## May
 [5/2] 이것이 코딩 테스트다 구현 # 02 : 시각 <br>
 [5/3] 이것이 코딩 테스트다 구현 # 03 : 게임 개발 <br>
 [5/4] 이것이 코딩 테스트다 구현 # 02 : 왕실의 나이트 && 구현 이론 정리 및 스택, 큐 [이론 정리](https://www.notion.so/599c1d2f458d4e22b393643d0d1ac2ac)<br>
 [5/5] 이것이 코딩 테스트다 재귀함수, DFS [이론 정리](https://www.notion.so/599c1d2f458d4e22b393643d0d1ac2ac)<br>
+[5/5] 이것이 코딩 테스트다 DFS, BFS [이론 정리](https://www.notion.so/599c1d2f458d4e22b393643d0d1ac2ac)<br>
