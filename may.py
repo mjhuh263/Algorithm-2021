@@ -191,3 +191,97 @@ current:  [3, 4]
 current:  [1, 4, 5]
 current:  [2, 3, 8]
 """
+# ======================================================================================
+
+# 이것이 코딩 테스트다 BFS 예제
+
+from collections import deque
+
+def bfs(graph, start, visited):
+    queue = deque([start])
+    visited[start] = True
+
+    while queue:
+        v = queue.popleft()
+        print(v, end=' ')
+        # 원소와 연결된 아직 방문하지 않은 원소들을 큐에 삽입
+        for i in graph[v]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = True
+
+graph = [
+    [],
+    [2, 3, 8],
+    [1, 7],
+    [1, 4, 5],
+    [3, 5],
+    [3, 4],
+    [7],
+    [2, 6, 8],
+    [1, 7]
+]
+
+visited = [False] * 9
+
+bfs(graph, 1, visited)
+
+# ======================================================================================
+
+# 이것이 코딩 테스트다 DFS/BFS # 03 : 음료수 얼려 먹기
+
+"""
+구멍 뚫여 있는 부분은 0, 칸막이가 존재하는 부분은 1로 표시된다.
+구멍이 뚫려 있는 부분까리 상하좌우로 붙어 있는 경우 서로 연결되어 있는 것으로 간주한다. 
+-> 총 아이슼림 개수를 구하는 프로그램을 작성해야 함 
+
+- 특정한 지점의 주변 상하좌우를 살펴본 뒤에 주변 지점 중에서 값이 '0'이면서 아직 방문하지 않은 지점이 있다면 해당 지점을 방문
+- 방문한 지점에서 다시 상하좌우를 살펴보면서 방문을 다시 진행하면 연결된 모든 지점을 방문할 수 있다.
+- 이와 같은 과정을 반복하며 방문하지 않은 지점의 수를 센다
+
+ex. 
+4 5
+00110
+000111
+11111
+00000
+
+ex. 
+3 3
+001
+010
+101
+"""
+
+n, m = map(int, input().split())
+
+graph = []
+
+for i in range(n):
+    graph.append(list(map(int, input())))
+
+# DFS로 특정한 노드를 방문한 뒤에 연결된 모든 노드들도 방문
+def dfs(x, y):
+    # 주어진 범위에서 벗어나면 종료
+    if x <= -1 or x >= n or y <= -1 or y >= m:
+        return False
+    # 현재 노드를 아직 방문하지 않았다면
+    if graph[x][y] == 0:
+        # 해당 노드 방문 처리
+        graph[x][y] = 1
+        # 상하좌우의 위치도 모두 재귀적으로 호출
+        dfs(x - 1, y)
+        dfs(x, y - 1)
+        dfs(x + 1, y)
+        dfs(x, y + 1)
+        return True
+    return False
+
+# 모든 노드에 대하여 음료수 채우기
+result = 0 
+for i in range(n):
+    for j in range(m):
+        if dfs(i, j) == True:
+            result += 1
+
+print(result)
