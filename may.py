@@ -289,6 +289,22 @@ print(result)
 # ======================================================================================
 
 # 이것이 코딩 테스트다 DFS/BFS # 04 : 미로 탈출
+"""
+BFS는 시작 지점에서 가까운 노드부터 차례대로 그래프의 모든 노드를 참색한다. 
+그러므로 (1, 1) 지점에서부터 BFS를 수행하여 모든 노드의 값을 거리 정보로 넣으면 된다. 
+특정한 노드를 방문하면 그 이전 노드의 거리에 1을 더한 값을 리스트에 넣는다.
+소스코드 상에서 첫번째 시작 위치는 다시 방문할 수 있도록 되어 첫번째 시작 위치에 해당하는 값이 3ㅇ로 변경될 여지가 있다 -> 하지만 문제에서는 단순히 오른쪽 아래 위치로 이동하는 것을 요구하고 있음.
+
+입력 예시:
+56 
+101010
+111111
+000001
+111111 111111
+
+출력:
+10
+"""
 
 from collections import deque
 
@@ -330,3 +346,165 @@ def bfs(x, y):
     return graph[n - 1][m - 1]
 
 print(bfs(0, 0))
+
+# ======================================================================================
+
+"""
+
+# 5.1 Graph Traversals - BFS & DFS
+
+
+1. visiting a vertex
+2. exploration of a vertex
+
+BFS: 1, 2, 4, 5, 7, 6, 3 - no vertex remaining to visit
+-> 1, 2, 4, 5, 7, 6, 3
+- explore a vertex then you go to the next vertex
+
+DFS: 1, 2, - since you explored a new vertex you have to explore that vertex - 3 - completly explored, comeback to 2 - 6, 7 - comeback to 1 - 4, 5
+-> 1, 2, 3, 6, 7, 4, 5
+- explore a new vertex suspend the vertex and start its exploration
+
+Binary Tree BFS, DFS
+Level order -> BFS: 1, 2, 3, 4, 5, 6, 7
+Pre-order -> DFS: 1, 2, 4, 5, 3, 6, 7
+
+Key points:
+BFS - Queue, Exploration completely done
+* first in first out: After the number is completely searched it is removed
+DFS - once you have reached a new vetex start exploring that vertex
+* first in last outL After the number is completely searched it is removed
+
+
+# geeksforgeeks Binary Search
+
+
+Binary Search Tree is a node-based binary tree data structure which has the following properties:
+- the left subtree of a node contains only nodes wih keys lesser than the node's key
+- the right subtree of a node contains only nodes with keys greater than the node's key
+- the left and right subtree each must also be a binary search tree - there must be no duplicate nodes
+
+The above properties of Binary Search Tree provides an ordering among keys so that the operations like search, minimum and maximum can be done fast. If there is not ordering then we may have to compare every key to search for a given key.
+
+We will start woth a search space of 'n' nodes -> discard one of the subtrees, discard 'n/2' nodes, search space reduced to 'n/2' -> reduce to 'n/4' -> unitl search space is reduced to onl one node 
+
+
+def search(root, key):
+    # root is nill or key is present at root
+    if root is None or root.val == key:
+        return root
+    # if key is greater than root's key
+    if root.val < key:
+        return search(root.right, key)
+    # key is smaller than root's key
+    return search(root.left, key)
+
+class Node:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
+
+# insert a new node with the given key
+def insertkey(root, key):
+    if root is None:
+        return Node(key)
+    else:
+        if root.val == key:
+            return root
+        elif root.val < key:
+            root.right = insertkey(root.right, key)
+        else:
+            root.left = insertkey(root.left, key)
+    return root
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val)
+        inorder(root.right)
+
+r = Node(50)
+r = insertkey(r, 30)
+r = insertkey(r, 20)
+r = insertkey(r, 40)
+r = insertkey(r, 70)
+r = insertkey(r, 60)
+r = insertkey(r, 80)
+
+inorder(r)
+
+# Output:
+20 
+30 
+40 
+50 
+60 
+70 
+80
+
+# 시간복잡도
+최악: O(h) -> O(n)
+
+"""
+
+# leetcode # 101 Symmetric Tree
+
+"""
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+ex)
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+
+Input: root = [1,2,2,null,3,null,3]
+Output: false
+
+Constraints:
+- The number of nodes in the tree is in the range [1, 1000].
+- -100 <= Node.val <= 100
+"""
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution(object):
+    def isSymmetric(self, root):
+        if not root:
+            return True
+        return self.dfs(root.left, root.right)
+    
+    def dfs(self, l, r):
+        if l and r:
+            return l.val == r.val and self.dfs(l.left, r.right) and self.dfs(l.right, r.left)
+        return l == r
+
+    def isSymmetric(self, root):
+        if not root:
+            return True
+        stack = [(root.left, root.right)]
+        while stack:
+            l, r = stack.pop()
+            if not l and not r:
+                continue
+            if not l or not r or (l.val != r.val):
+                return False
+            stack.append((l.left, r.right))
+            stack.append((l.right, r.left))
+        return True
+
+"""
+시간제한: 30분
+@OldCodingFarmer님의 solution
+
+문제풀이 체크리스트
+◼️ 시간 제한 지났음에도 문제 터치 못함
+◻️ 시간 제한 후 코드 완성
+◻️ 코드 미완성
+◻️ 코드 완성 - 에러
+◻️ 코드 완성 - 정답
+"""
