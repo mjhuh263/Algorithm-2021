@@ -351,7 +351,7 @@ print(bfs(0, 0))
 
 """
 
-# 5.1 Graph Traversals - BFS & DFS
+[5.1 Graph Traversals - BFS & DFS]
 
 
 1. visiting a vertex
@@ -376,7 +376,7 @@ DFS - once you have reached a new vetex start exploring that vertex
 * first in last outL After the number is completely searched it is removed
 
 
-# geeksforgeeks Binary Search
+[geeksforgeeks Binary Search]
 
 
 Binary Search Tree is a node-based binary tree data structure which has the following properties:
@@ -508,3 +508,167 @@ class Solution(object):
 ◻️ 코드 완성 - 에러
 ◻️ 코드 완성 - 정답
 """
+
+# ======================================================================================
+
+"""
+
+[Do it! 자료구조와 함께 배우는 알고리즘 입문]
+
+내부 정렬: 정렬할 데이터를 하나의 배열에 저장할 수 있는 경우에 사용하는 알고리즘
+외부 정렬: 정렬한 데이터가 많아서 하나의 배열에 저장할 수 없는 경우에 사용하는 알고리즘
+** 정렬 알고리즘의 핵심은 교환, 선택, 삽입
+
+--- 6-2 버블 정렬 ---
+버블 정렬은 이웃한 두 원소의 대소 관계를 비교하여 필요에 따라 교환을 반복하는 알고리즘으로 단순 교환 정렬
+
+"""
+# n개의 원소 수와 각각의 원솟값을 입력받는다. i값을 0부터 n-2까지 1을 증가시키고, 패스를 n-1번 수행.
+
+from typing import MutableSequence
+
+def bubble_sort(a: MutableSequence) -> None:
+    n = len(a)
+    for i in range(n - 1):
+        for j in range(n - 1, i, -1):
+            if a[j - 1] > a[j]:
+                a[j - 1], a[j] = a[j], a[j - 1]
+
+if __name__ == "__main__":
+    print('버블 정렬을 수행합니다.')
+    num = int(input('원소 수를 입력하세요: '))
+    x =  [None] * num
+
+    for i in range(num):
+        x[i] = int(input(f'x[{i}]'))
+
+    bubble_sort(x)
+
+    print('오름차순으로 정렬했습니다.')
+
+    for i in range(num):
+        print(f'x[{i}] = {x[i]}')
+
+"""
+[이진탐색] - https://ratsgo.github.io/data%20structure&algorithm/2017/10/22/bst/
+
+이진탐색트리를 순회할 때 중위순회 방식을 쓴다 - 왼쪽 서브트리-> 노드 -> 오른쪽 스브트리 순으로 순회
+
+이진참색트리의 핵심 연산은 - 검색, 삽입, 삭제  (기타: 생성, 삭제, isEmpty, tree traverse 연산)
+
+[637. Average of Levels in Binary Tree]
+
+Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.
+
+ex)
+Input: root = [3,9,20,null,15,7]
+Output: [3.00000,14.50000,11.00000]
+Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+Hence return [3, 14.5, 11].
+
+Input: root = [3,9,20,15,7]
+Output: [3.00000,14.50000,11.00000]
+
+constraints)
+- The number of nodes in the tree is in the range [1, 104].
+- -231 <= Node.val <= 231 - 1
+
+"""
+
+# Leetcode # 637 Average of Levels in Binary Tree
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution(object):
+    def averageOfLevels(self, root: TreeNode):
+        result = []
+        level = (root,)
+        while level:
+            # result => sum(of the  nodes in the same level) divided with the number of nodes present on the level
+            result.append(sum(node.val for node in level) / len(level))
+            # level => 만일 노드에 잎새노드가 있으면 오,왼 잎새노드를 level에 넣기
+            level = tuple(leaf for node in level for leaf in (node.left, node.right) if leaf)
+
+        return result
+
+"""
+Input:
+    3
+   / \
+  9  20
+    /  \
+   15   7
+
+input: [3,9,20,null,null,15,7]
+
+첫번째 level print - TreeNode
+----------------
+initial level (TreeNode{val: 3, left: TreeNode{val: 9, left: None, right: None}, right: TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}},)
+
+실행후 result, level print - TreeNode, tuple(TreeNode를 storage하는)
+----------------
+result [3.0]
+level (TreeNode{val: 9, left: None, right: None}, TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}})
+result [3.0, 14.5]
+level (TreeNode{val: 15, left: None, right: None}, TreeNode{val: 7, left: None, right: None})
+result [3.0, 14.5, 11.0]
+level ()
+
+
+
+1. start level = [3], result = []
+2. sum of [3] is 3 and divide by 1, store the result 3 
+3. iterate over [3], store (9, 20), itnerate over it, if they are not None store in level
+4. level = [9, 20], result = [3]
+5. average of level is 14.5, tierate over [9, 20] 9 got (None, None) children, 20 got (15, 7), None will not be yielded, got new level 
+6. level = [15, 7], result = [3, 14.5]
+7. avg is 11, new level is empty, stop while loop
+8. return result = [3, 14.5, 11]
+
+시간제한: 30분
+@dan2000kr님의 solution
+
+문제풀이 체크리스트
+◻️ 시간 제한 지났음에도 문제 터치 못함
+◻️ 시간 제한 후 코드 완성
+◼️ 코드 미완성
+◻️ 코드 완성 - 에러
+◻️ 코드 완성 - 정답
+"""
+
+# BTS
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.leftChild = None
+        self.rightChild = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+    
+    def setRoot(self, val):
+        self.root = Node(val)
+
+    def insert(self, val):
+        if (self.root is None):
+            self.setRoot(val)
+        else:
+            self.insertNode(self.root, val)
+
+    def insertNode(self, currentNode, val):
+        if (val <= currentNode.val):
+            if (currentNode.leftChild):
+                self.insertNode(currentNode.leftChild, val)
+            else:
+                currentNode.leftChild = Node(val)
+        elif (val > currentNode.val):
+            if (currentNode.rightChild):
+                self.insertNode(currentNode.rightChild, val)
+            else:
+                currentNode.rightChild = Node(val)
