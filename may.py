@@ -672,3 +672,90 @@ class BinarySearchTree:
                 self.insertNode(currentNode.rightChild, val)
             else:
                 currentNode.rightChild = Node(val)
+
+# ======================================================================================
+
+# Do it! 자료구조와 함께 배우는 알고리즘 입문 버블정렬
+
+from typing import MutableSequence
+
+def bubble_sort_verbose(a: MutableSequence) -> None:
+    ccnt = 0 
+    scnt = 0
+    n = len(a)
+    
+    for i in range(n - 1):
+        print(f'패스 {i + 1}')
+        for j in range(n - 1, i, -1):
+            for m in range(0, n -1):
+                print(f'{a[m]:2}' + (' 'if m != j -1 else ' +' if a[j - 1] > a[j] else ' -'), end='')
+
+            print(f'{a[n - 1]:2}')
+            ccnt += 1 
+            if a[j - 1] > a[j]:
+                scnt += 1
+                a[j - 1], a[j] = a[j], a[j - 1]
+            for m in range(0, n-1):
+                print(f'{a[m]:2}', end='')
+            print(f'{a[n - 1]:2}')
+        print('비교를 {ccnt}번 했습니다.')
+        print('교환를 {scnt}번 했습니다.')
+
+# 교환이 더 이상 이루어지지 않을 경우 정렬을 종료하는 코드 -> 비교 연산이 크게 줄어 실행 시간을 단축할 수 있다 
+
+from typing import MutableSequence
+
+def bubble_sort(a: MutableSequence) -> None:
+    n = len(a)
+    for i in range(n - 1):
+        exchg = 0 # 패스를 시작하기 전에 0으로 초기화
+        for j in range(n - 1, i, -1):
+            if a[j - 1] > a[j]:
+                a[j - 1], a[j] = a[j], a[j - 1]
+            exchg += 1
+        if exchg == 0:
+            break
+
+# 첫번째 패스의 정렬이 종료됐으면 패스를 좁혀서 비교, 교환하기 
+
+from typing import MutableSequence
+
+def bubble_sort(a: MutableSequence) -> None:
+    n = len(a)
+    k = 0
+    while k < n-1:
+        last = n -1
+        for  j in range(n - 1, k, -1):
+            if a[j - 1] > a[j]:
+                a[j - 1], a[j] = a[j], a[j - 1]
+            last = j
+        k = last
+
+# 셰이커 정렬 
+
+"""
+
+첫번째 원소가 가장 큰 원소인 경우에는 버블 정렬이 적합하지 않다.
+버블 정렬을 개선한 알고리즘이 셰이커 정렬이다 
+홀수 패스에서는 가장 적은 원소를 맨 앞으로 이동시키고 짝수 패스에서는 가장 큰 원소를 맨뒤로 이동시켜 패스의 스캔 방향을 번갈아 바꾸어 본다. 
+
+"""
+from typing import MutableSequence
+
+def shaker_sort(a: MutableSequence) -> None:
+    left = 0 # 스캔 범위의 첫 원소 인덱스
+    right = len(a) - 1 # 스캔 범위의 마지막 원소 인덱스
+    last = right 
+    while left < right:
+        for j in range(right, left, -1):
+            if a[j - 1] > a[j]:
+                a[j - 1], a[j] = a[j], a[j - 1]
+                last = j 
+        left = last 
+
+        for j in range(left, right):
+            if a[j] > a[j + 1]:
+                a[j - 1], a[j] = a[j], a[j - 1]
+                last = j
+
+        right = last # 마지막 인덱스를 right으로 다시 넣기
