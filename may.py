@@ -640,7 +640,7 @@ level ()
 ◻️ 코드 완성 - 정답
 """
 
-# BTS
+# BST
 
 class Node:
     def __init__(self, val):
@@ -759,3 +759,46 @@ def shaker_sort(a: MutableSequence) -> None:
                 last = j
 
         right = last # 마지막 인덱스를 right으로 다시 넣기
+
+# ======================================================================================
+
+# Do it! 자료구조와 함께 배우는 알고리즘 입문 단순선택정렬
+
+"""
+1. 아직 정렬하지 않은 부분에서 값ㅇ 가장 작은 원소 a[min]을 선택한다
+2. a[min]과 아직 정렬하지 않은 부분에서 맨 앞에 있는 원소를 교환합니다
+
+for i in range(n - 1):
+    min -> a애서 키값이 가장 적은 원소의 인덱스
+    a[i]와 a[min]의 값을 교환합니다
+"""
+
+from typing import MutableSequence
+
+def selection_sort(a: MutableSequence):
+    n = len(a)
+    for i in range(n - 1):
+        min = i # 정렬할 부분에서 가장 작은 인덱스
+        for j in range(i + 1, n):
+            if a[j] < a[min]:
+                min = j 
+        a[i], a[min] = a[min], a[i]
+
+
+# BST
+
+def find(self, val):
+    if (self.findNode(self.root, val) is False):
+        return False
+    else:
+        return True
+
+def findNode(self, currentNode, val):
+    if (currentNode is None):
+        return False
+    elif (val == currentNode.val):
+        return currentNode
+    elif (val < currentNode.val):
+        return self.findNode(currentNode.leftChild, val)
+    else:
+        return self.findNode(currentNode.rightChild, val)
