@@ -785,7 +785,7 @@ def selection_sort(a: MutableSequence):
         a[i], a[min] = a[min], a[i]
 
 
-# BST
+# BST find
 
 def find(self, val):
     if (self.findNode(self.root, val) is False):
@@ -802,3 +802,71 @@ def findNode(self, currentNode, val):
         return self.findNode(currentNode.leftChild, val)
     else:
         return self.findNode(currentNode.rightChild, val)
+
+# ======================================================================================
+
+# BST insert
+
+"""
+
+새로운 데이터는 트리의 잎새노드에 붙인다. 
+삽입연산은 반드시 입새노드에서 이뤄지게 된다 
+
+이진탐색 트리의 가장 왼쪽 잎새노드는 해당 트리의 최소값, 제일 오른쪽 잎새노드는 최대값이 된다. 
+만약 위 트리에서 100을 추가하려고 한다면 제일 오른쪽 잎새노드의 오른쪽 자식노드를 만들고 여기에 붙인다. 
+
+"""
+
+def insert(self, val):
+    if (self.root is None):
+        self.setRoot(val)
+    else: 
+        self.insertNode(self.root, val)
+
+def insertNode(self, currentNode, val):
+    if (val <= currentNode.val):
+        if (currentNode.leftChild):
+            self.insertNode(currentNode.leftChild, val)
+        else:
+            currentNode.leftChild = Node(val)
+    
+    elif (val > currentNode.val):
+        if (currentNode.rightChild):
+            self.insertNode(currentNode.rightChild, val)
+        else:
+            currentNode.rightChild = Node(val)
+
+# BST delete 
+
+"""
+
+case 1: 자식 노드가 없는 경우 
+그냥 삭제하면 됨
+
+case 2: 자식노드가 하나 있는 경우 
+해당 노드를 지우고 해당 노드의 자식노드와 부모노드를 연결해줌
+어차피 서브트리의 모든 값ㅇㄴ 부모노드보다 작다
+
+case3: 
+중위순회방식의 트리: 4, 10, 13, 16, 20, 22, 25, 28, 30, 42
+삭제할 노드에 successor를 복사해놓고, 기존 successor 위치에 있던 노드를 삭제하게 되면 정렬된 순서를 유지(=이진탐색트리 속성을 만족)하면서도 결과를 얻는다
+
+만약 successor도 predecessor도 자식 노드가 하나이거나 존재하지 안을 경우: case3로 처리 
+
+
+"""
+
+# BST 중위순회 코드
+
+def traverse(self):
+    return self.traverseNode(self.root)
+
+def traverseNode(self, currentNode):
+    result = []
+    if (currentNode.leftChild is not None):
+        result.extend(self.traverseNode(currentNode.leftChild))
+    if (currentNode is not None):
+        result.extend([currentNode.val])
+    if (currentNode.rightChild is not None):
+        result.extend(self.traverseNode(currentNode.rightCHild))
+    return result
