@@ -30,3 +30,4 @@
 [5/13] Do it! 자료구조와 함께 배우는 알고리즘 입문 버블정렬 예제, 셰이커 정렬 예제<br>
 [5/14] Do it! 자료구조와 함께 배우는 알고리즘 입문 단순선택정렬, BST findNode 예제<br>
 [5/18] BST insert, delete, traverse 예제<br>
+[5/22] leetcode # 217 : Contains Duplicate, # leetcode # 387 : First Unique Character in a String<br>

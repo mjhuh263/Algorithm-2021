@@ -870,3 +870,15 @@ def traverseNode(self, currentNode):
     if (currentNode.rightChild is not None):
         result.extend(self.traverseNode(currentNode.rightCHild))
     return result
+
+# ======================================================================================
+
+# leetcode # 217 : Contains Duplicate
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return len(nums) != len(set(nums))
+
+# ======================================================================================
+
+# leetcode # 387 : First Unique Character in a String
